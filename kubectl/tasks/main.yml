@@ -1,0 +1,41 @@
+# RUN MINIKUBE
+- name: Start minikube
+  command: minikube start --driver=docker
+  register: minikube_out
+  changed_when: "'Done!' in minikube_out.stdout"
+
+- name: Wait for node
+  command: kubectl get nodes
+  register: nodes
+  retries: 10
+  delay: 5
+  until: nodes.rc == 0
+
+# CONFIGURE HELM
+# - name: Add helm repo
+#   command: helm repo add {{ item.name }} {{ item.url }}
+#   loop: "{{ helm_repos }}"
+#   ignore_errors: true
+
+# - name: Update helm repos
+#   command: helm repo update
+
+# - name: Install nginx
+#   command: helm install nginx bitnami/nginx
+#   ignore_errors: true
+
+# - name: Install postgres
+#   command: helm install postgres bitnami/postgresql
+#   ignore_errors: true
+
+# - name: Install redis
+#   command: helm install redis bitnami/redis
+#   ignore_errors: true
+
+# - name: Install kafka
+#   command: helm install kafka bitnami/kafka
+#   ignore_errors: true
+
+# - name: Install clickhouse
+#   command: helm install clickhouse bitnami/clickhouse
+#   ignore_errors: true

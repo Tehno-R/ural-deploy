@@ -1,0 +1,99 @@
+# UPGRADE
+    - name: upgrade
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+# ADD KEYS
+    - name: add GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: add docker repository to apt
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present    
+
+# INSTALL DOCKER
+    - name: install docker
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      loop:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+  
+    - name: check docker is active
+      service:
+        name: docker
+        state: started
+        enabled: yes
+  
+# ADD USER IN DOCKER GROUP
+    - name: Ensure group "docker" exists
+      ansible.builtin.group:
+        name: docker
+        state: present
+
+    - name: adding ubuntu to docker group
+      user:
+        name: vboxuser
+        groups: docker
+        append: yes
+
+    - name: Install docker-compose
+      get_url:
+          url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+          dest: /usr/local/bin/docker-compose
+          mode: 'u+x,g+x'
+
+    - name: Change file ownership, group and permissions
+      ansible.builtin.file:
+        path: /usr/local/bin/docker-compose
+        owner: vboxuser
+        group: vboxuser
+
+
+# INSTALL MINIKUBE
+    - name: download minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+        dest: /minikube_latest_amd64.deb
+
+    - name: install minikube
+      apt:
+        deb: /minikube_latest_amd64.deb
+        state: present
+    
+# INSTALL KUBECTL
+    - name: Install kubectl
+      get_url:
+        url: https://dl.k8s.io/release/v1.35.0/bin/linux/amd64/kubectl
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
+# INSTALL HELM
+    - name: Download Helm archive
+      tags: helm
+      get_url:
+        url: "https://get.helm.sh/helm-v4.1.0-linux-amd64.tar.gz"
+        dest: /tmp/helm.tar.gz
+        mode: '0644'
+
+    - name: Extract Helm archive
+      tags: helm
+      unarchive:
+        src: /tmp/helm.tar.gz
+        dest: /tmp
+        remote_src: true
+
+    - name: Install Helm binary
+      tags: helm
+      copy:
+        src: /tmp/linux-amd64/helm
+        dest: /usr/local/bin/helm
+        mode: '0755'
+        remote_src: true

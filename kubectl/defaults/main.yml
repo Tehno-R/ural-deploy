@@ -1,0 +1,10 @@
+helm_repos:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+
+services:
+  - nginx
+  - postgresql
+  - redis
+  - kafka
+  - clickhouse

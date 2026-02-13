@@ -1,0 +1,8 @@
+[hosts]
+ubuntu-vm ansible_port=2000 
+fedora-vm ansible_port=2001
+centos-vm ansible_port=2002
+
+[hosts:vars]
+ansible_host=localhost
+ansible_user=vboxuser
