@@ -18,24 +18,20 @@ spec:
         image: quay.io/keycloak/keycloak:24.0
         args:
         - start-dev
-
         ports:
         - containerPort: 8080
-
         env:
-
+        
         - name: KC_DB
           value: postgres
-
         - name: KC_DB_URL
-          value: jdbc:postgresql://postgres:5432/keycloak
+          value: jdbc:postgresql://postgres:5433/keycloak
 
         - name: KC_DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: postgres-secret
               key: POSTGRES_USER
-
         - name: KC_DB_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -44,6 +40,5 @@ spec:
 
         - name: KEYCLOAK_ADMIN
           value: admin
-
         - name: KEYCLOAK_ADMIN_PASSWORD
           value: admin
