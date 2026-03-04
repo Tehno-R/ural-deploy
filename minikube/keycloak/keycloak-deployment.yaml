@@ -21,12 +21,10 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        
         - name: KC_DB
           value: postgres
         - name: KC_DB_URL
-          value: jdbc:postgresql://postgres:5433/keycloak
-
+          value: jdbc:postgresql://postgres:5432/keycloak
         - name: KC_DB_USERNAME
           valueFrom:
             secretKeyRef:
@@ -37,7 +35,6 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: POSTGRES_PASSWORD
-
         - name: KEYCLOAK_ADMIN
           value: admin
         - name: KEYCLOAK_ADMIN_PASSWORD

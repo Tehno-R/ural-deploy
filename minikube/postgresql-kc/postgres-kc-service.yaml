@@ -8,4 +8,4 @@ spec:
     app: postgres-kc
   ports:
   - port: 5432
-    targetPort: 5433
+    targetPort: 5432
