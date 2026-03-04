@@ -18,16 +18,9 @@ spec:
         image: postgres:16
         ports:
         - containerPort: 5432
-        volumeMounts:
-        - name: postgres-kc-storage
-          mountPath: /var/lib/postgresql/data
         env:
         - name: POSTGRES_DB
           value: keycloak
         envFrom:
         - secretRef:
             name: postgres-secret
-      volumes:
-        - name: postgres-kc-storage
-          persistentVolumeClaim:
-            claimName: postgres-kc-pvc
