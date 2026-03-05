@@ -10,4 +10,4 @@ spec:
   ports:
   - port: 10000
     targetPort: 8080
-    NodePort: 30400
+    nodePort: 30400
