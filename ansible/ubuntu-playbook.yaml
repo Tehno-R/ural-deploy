@@ -6,4 +6,4 @@
 
 - hosts: ubuntu-vm
   roles:
-      - kubectl
+      - minikube

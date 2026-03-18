@@ -24,3 +24,16 @@ spec:
         envFrom:
         - secretRef:
             name: postgres-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: dev
+spec:
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432

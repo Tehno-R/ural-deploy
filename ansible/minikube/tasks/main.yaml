@@ -1,0 +1,49 @@
+# --- Start Minikube ---
+- name: Check minikube status
+  command: minikube status --format='{{.Host}}'
+  register: minikube_status
+  ignore_errors: true
+
+- name: Delete minikube if running
+  command: minikube delete
+  when: minikube_status.stdout == "Running"
+
+- name: Start minikube
+  command: minikube start
+
+# --- Repo ---
+- name: Remove repo if exists
+  file:
+    path: "{{ repo_dest }}"
+    state: absent
+
+- name: Clone repo
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ repo_dest }}"
+    version: HEAD
+
+# --- Ingress Nginx Controller ---
+- name: Enable nginx ingress addon
+  command: minikube addons enable ingress
+
+- name: Wait for ingress controller
+  command: kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx
+
+- name: Apply ingress
+  command: kubectl apply -f {{ k8s_path }}/{{ ingress_file }}
+
+# --- Applying Manifests ---
+- name: Apply manifests in order
+  command: kubectl apply -f {{ k8s_path }}/{{ item }}
+  loop: "{{ k8s_manifests }}"
+  loop_control:
+    label: "{{ item }}"
+
+# --- ждать readiness после каждого деплоя ---
+- name: Wait for deployments
+  command: kubectl rollout status deployment/{{ item }}
+  loop:
+  - postgresql-deployment
+  - redis-deployment
+  - kafka-deployment
