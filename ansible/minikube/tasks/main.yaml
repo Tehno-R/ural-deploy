@@ -1,12 +1,6 @@
 # --- Start Minikube ---
-- name: Check minikube status
-  command: minikube status --format='{{.Host}}'
-  register: minikube_status
-  ignore_errors: true
-
-- name: Delete minikube if running
+- name: Delete minikube
   command: minikube delete
-  when: minikube_status.stdout == "Running"
 
 - name: Start minikube
   command: minikube start
@@ -39,11 +33,3 @@
   loop: "{{ k8s_manifests }}"
   loop_control:
     label: "{{ item }}"
-
-# --- ждать readiness после каждого деплоя ---
-- name: Wait for deployments
-  command: kubectl rollout status deployment/{{ item }}
-  loop:
-  - postgresql-deployment
-  - redis-deployment
-  - kafka-deployment

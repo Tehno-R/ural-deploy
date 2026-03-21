@@ -1,6 +1,6 @@
 repo_url: "https://github.com/Tehno-R/ural-deploy.git"
-repo_dest: "/repo"
-k8s_path: "{{ repo_dest }}/minikube"   # где лежат манифесты
+repo_dest: "~/repo"
+k8s_path: "{{ repo_dest }}/minikube"   # manifests place
 ingress_file: "ingress.yaml"
 
 k8s_manifests:

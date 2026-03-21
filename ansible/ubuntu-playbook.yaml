@@ -1,8 +1,8 @@
 ---
-- hosts: ubuntu-vm
-  become: true
-  roles:
-      - Initial
+# - hosts: ubuntu-vm
+#   become: true
+#   roles:
+#       - Initial
 
 - hosts: ubuntu-vm
   roles:
