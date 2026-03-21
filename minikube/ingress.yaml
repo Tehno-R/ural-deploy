@@ -8,10 +8,10 @@ spec:
   rules:
     - http:
         paths:
-          - path: /v1
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: hello-minikube1
+                name: ural-aggregator
                 port:
-                  number: 8080
+                  number: 10000
