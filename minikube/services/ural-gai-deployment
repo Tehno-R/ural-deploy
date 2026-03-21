@@ -20,11 +20,11 @@ spec:
           env:
             - name: SERVER_PORT
               value: "8080"
-            - name: MOCKS_WANTED_GOOD_VINS
+            - name: WANTED_GOOD_VINS
               value: "WWWWWW,VVVVVV"
-            - name: MOCKS_ACCIDENT_GOOD_VINS
+            - name: ACCIDENT_GOOD_VINS
               value: "WWWWWW,VVVVVV"
-            - name: MOCKS_INSPECTION_GOOD_VINS
+            - name: INSPECTION_GOOD_VINS
               value: "WWWWWW,VVVVVV"
 
 
