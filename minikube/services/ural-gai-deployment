@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ural-gai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ural-gai
+  template:
+    metadata:
+      labels:
+        app: ural-gai
+    spec:
+      containers:
+        - name: ural-gai
+          image: kerzhakovn/ural-gai-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: MOCKS_WANTED_GOOD_VINS
+              value: "WWWWWW,VVVVVV"
+            - name: MOCKS_ACCIDENT_GOOD_VINS
+              value: "WWWWWW,VVVVVV"
+            - name: MOCKS_INSPECTION_GOOD_VINS
+              value: "WWWWWW,VVVVVV"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ural-gai
+spec:
+  type: ClusterIP
+  selector:
+    app: ural-gai
+  ports:
+    - port: 10001 
+      targetPort: 8080 
