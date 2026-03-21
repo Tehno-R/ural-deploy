@@ -19,7 +19,7 @@ spec:
             - containerPort: 8080
           env:
             - name: SERVER_PORT
-              value: 8080
+              value: "8080"
             - name: PUBLIC_KEY
               value: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngAuaqK7wOyXJtI6EKpMAwVSrP0PEzZeg/qZ94RzsXolw5ecMu1kzLvCHQmW2lkfOTf1bRYpRJUajpYTZycmtxEJ2CpIIrM0/2rIZv9LwotHGYG26rhGEU1l/YUMgc3jfEEUVE9wmytCHhLCQMHyUN7giVgd9iBzR8EFbsytA1q44dYbDZObTIPWdMx+54FLjm2NJedKX7FaJpsUEs6cmK6o4M/EmF7qHiiZB7ImRClgEu167k86we3V17sR29ZbuKuagCkzO6TijYukFRVfxEN9YEH9FOyPI5xGK/6o8p0lgasoPPeVOC63nvy32HgI2Y3MR437RX/kAjbtjik88QIDAQAB"
             - name: PROXY_CARGO_URL
@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ural-aggregator-service
+  name: ural-aggregator
 spec:
   type: ClusterIP
   selector:
