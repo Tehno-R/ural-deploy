@@ -22,12 +22,18 @@ spec:
               value: "8080"
             - name: PUBLIC_KEY
               value: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngAuaqK7wOyXJtI6EKpMAwVSrP0PEzZeg/qZ94RzsXolw5ecMu1kzLvCHQmW2lkfOTf1bRYpRJUajpYTZycmtxEJ2CpIIrM0/2rIZv9LwotHGYG26rhGEU1l/YUMgc3jfEEUVE9wmytCHhLCQMHyUN7giVgd9iBzR8EFbsytA1q44dYbDZObTIPWdMx+54FLjm2NJedKX7FaJpsUEs6cmK6o4M/EmF7qHiiZB7ImRClgEu167k86we3V17sR29ZbuKuagCkzO6TijYukFRVfxEN9YEH9FOyPI5xGK/6o8p0lgasoPPeVOC63nvy32HgI2Y3MR437RX/kAjbtjik88QIDAQAB"
-            - name: PROXY_CARGO_URL
-              value: "http://ural-cargo:10004"
-            - name: PROXY_USERS_URL
-              value: "http://ural-users:10005"
             - name: PROXY_AUTH_URL
-              value: "http://ural-auth:10006"
+              value: "http://ural-auth:10006/api"
+            - name: PROXY_USERS_URL
+              value: "http://ural-users:10005/api"
+            - name: PROXY_CARS_URL
+              value: "http://ural-cars:10002/api"
+            - name: PROXY_CARGO_URL
+              value: "http://ural-cargo:10004/api"
+            - name: PROXY_CONTRACTS_URL
+              value: "http://ural-contracts:10003/api"
+            - name: FRONT_URL
+              value: "http://ural-front:10007/api"
             - name: LOGGING_LEVEL_ROOT
               value: "info"
           imagePullPolicy: Always
