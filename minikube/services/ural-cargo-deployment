@@ -25,12 +25,12 @@ spec:
               value: "jdbc:postgresql://postgres:5432"
             - name: DB_NAME
               value: "ural"
-            - name: DB_USERNAME
+            - name: DB_USER
               value: "postgres"
             - name: DB_PASS
               value: "postgres"
             - name: SHOW_SQL
-              value: "true"
+              value: "false"
             - name: LOGGING_LEVEL_ROOT
               value: "info"
           imagePullPolicy: Always
