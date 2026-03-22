@@ -26,6 +26,7 @@ spec:
               value: "WWWWWW;VVVVVV"
             - name: INSPECTION_GOOD_VINS
               value: "WWWWWW;VVVVVV"
+          imagePullPolicy: Always
 
 
 ---

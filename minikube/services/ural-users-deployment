@@ -34,6 +34,7 @@ spec:
               value: "http://ural-auth:10006/api/auth"
             - name: LOGGING_LEVEL_ROOT
               value: "info"
+          imagePullPolicy: Always
 
 
 ---

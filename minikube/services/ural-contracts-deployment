@@ -36,6 +36,7 @@ spec:
               value: "http://ural-cargo:10004/api/cargo"
             - name: LOGGING_LEVEL_ROOT
               value: "info"
+          imagePullPolicy: Always
 
 
 ---

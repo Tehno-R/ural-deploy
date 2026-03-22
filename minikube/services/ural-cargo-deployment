@@ -32,6 +32,7 @@ spec:
               value: "true"
             - name: LOGGING_LEVEL_ROOT
               value: "info"
+          imagePullPolicy: Always
 
 
 
