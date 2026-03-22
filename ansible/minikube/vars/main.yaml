@@ -1,11 +1,17 @@
 repo_url: "https://github.com/Tehno-R/ural-deploy.git"
 repo_dest: "~/repo"
-k8s_path: "{{ repo_dest }}/minikube"   # manifests place
+manifests_path: "{{ repo_dest }}/minikube"   # manifests place
+manifests_services_path: "{{ repo_dest }}/minikube/services"
 ingress_file: "ingress.yaml"
 
-k8s_manifests:
+infra:
   - namespace.yaml
   - postgres-secret.yaml
   - postgresql-deployment.yaml
   - redis-deployment.yaml
   - kafka-deployment.yaml
+
+services:
+  - ural-aggregator-deployment
+  - ural-gai-deployment
+  - ural-cars-deployment

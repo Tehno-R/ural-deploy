@@ -25,11 +25,17 @@
   command: kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx
 
 - name: Apply ingress
-  command: kubectl apply -f {{ k8s_path }}/{{ ingress_file }}
+  command: kubectl apply -f {{ manifests_path }}/{{ ingress_file }}
 
 # --- Applying Manifests ---
-- name: Apply manifests in order
-  command: kubectl apply -f {{ k8s_path }}/{{ item }}
-  loop: "{{ k8s_manifests }}"
+- name: Apply manifests for infrastructure
+  command: kubectl apply -f {{ manifests_path }}/{{ item }}
+  loop: "{{ infra }}"
+  loop_control:
+    label: "{{ item }}"
+
+- name: Apply manifests for services
+  command: kubectl apply -f {{ manifests_services_path }}/{{ item }}
+  loop: "{{ services }}"
   loop_control:
     label: "{{ item }}"

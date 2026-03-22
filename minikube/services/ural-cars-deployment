@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ural-cars
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ural-cars
+  template:
+    metadata:
+      labels:
+        app: ural-cars
+    spec:
+      containers:
+        - name: ural-cars
+          image: kerzhakovn/ural-cars-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432"
+            - name: DB_NAME
+              value: "ural"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASS
+              value: "postgres"
+            - name: SHOW_SQL
+              value: "true"
+            - name: LOGGING_LEVEL_ROOT
+              value: "info"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ural-cars
+spec:
+  type: ClusterIP
+  selector:
+    app: ural-cars
+  ports:
+    - port: 10002
+      targetPort: 8080 
