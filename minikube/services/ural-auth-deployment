@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ural-gai
+  name: ural-auth
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ural-gai
+      app: ural-auth
   template:
     metadata:
       labels:
-        app: ural-gai
+        app: ural-auth
     spec:
       containers:
-        - name: ural-gai
-          image: kerzhakovn/ural-gai-service:latest
+        - name: ural-auth
+          image: kerzhakovn/ural-auth-service:latest
           ports:
             - containerPort: 8080
           env:
@@ -46,11 +46,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ural-gai
+  name: ural-auth
 spec:
   type: ClusterIP
   selector:
-    app: ural-gai
+    app: ural-auth
   ports:
     - port: 10006 
       targetPort: 8080 
