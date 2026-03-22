@@ -15,3 +15,7 @@ services:
   - ural-aggregator-deployment
   - ural-gai-deployment
   - ural-cars-deployment
+  - ural-cargo-deployment
+  - ural-contracts-deployment
+  - ural-users-deployment
+  - ural-auth-deployment
