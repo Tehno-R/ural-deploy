@@ -17,15 +17,15 @@
     dest: "{{ repo_dest }}"
     version: HEAD
 
-# --- Ingress Nginx Controller ---
-- name: Enable nginx ingress addon
-  command: minikube addons enable ingress
+# # --- Ingress Nginx Controller ---
+# - name: Enable nginx ingress addon
+#   command: minikube addons enable ingress
 
-- name: Wait for ingress controller
-  command: kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx
+# - name: Wait for ingress controller
+#   command: kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx
 
-- name: Apply ingress
-  command: kubectl apply -f {{ manifests_path }}/{{ ingress_file }}
+# - name: Apply ingress
+#   command: kubectl apply -f {{ manifests_path }}/{{ ingress_file }}
 
 # --- Applying Manifests ---
 - name: Apply manifests for infrastructure
