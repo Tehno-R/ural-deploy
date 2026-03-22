@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ural-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ural-users
+  template:
+    metadata:
+      labels:
+        app: ural-users
+    spec:
+      containers:
+        - name: ural-users
+          image: kerzhakovn/ural-users-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432"
+            - name: DB_NAME
+              value: "ural"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASS
+              value: "postgres"
+            - name: SHOW_SQL
+              value: "true"
+            - name: AUTH_URL
+              value: "http://ural-auth:10006/api/auth"
+            - name: LOGGING_LEVEL_ROOT
+              value: "info"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ural-users
+spec:
+  type: ClusterIP
+  selector:
+    app: ural-users
+  ports:
+    - port: 10005 
+      targetPort: 8080 

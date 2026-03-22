@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ural-gai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ural-gai
+  template:
+    metadata:
+      labels:
+        app: ural-gai
+    spec:
+      containers:
+        - name: ural-gai
+          image: kerzhakovn/ural-gai-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432"
+            - name: DB_NAME
+              value: "ural"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASS
+              value: "postgres"
+            - name: SHOW_SQL
+              value: "true"
+            - name: REFRESH_TOKEN_EXPIRED_ON_SECONDS
+              value: "604800"
+            - name: ACCESS_TOKEN_EXPIRED_ON_SECONDS
+              value: "300"
+            - name: PUBLIC_KEY
+              value: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAngAuaqK7wOyXJtI6EKpMAwVSrP0PEzZeg/qZ94RzsXolw5ecMu1kzLvCHQmW2lkfOTf1bRYpRJUajpYTZycmtxEJ2CpIIrM0/2rIZv9LwotHGYG26rhGEU1l/YUMgc3jfEEUVE9wmytCHhLCQMHyUN7giVgd9iBzR8EFbsytA1q44dYbDZObTIPWdMx+54FLjm2NJedKX7FaJpsUEs6cmK6o4M/EmF7qHiiZB7ImRClgEu167k86we3V17sR29ZbuKuagCkzO6TijYukFRVfxEN9YEH9FOyPI5xGK/6o8p0lgasoPPeVOC63nvy32HgI2Y3MR437RX/kAjbtjik88QIDAQAB"
+            - name: PRIVATE_KEY
+              value: "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCeAC5qorvA7Jcm0joQqkwDBVKs/Q8TNl6D+pn3hHOxeiXDl5wy7WTMu8IdCZbaWR85N/VtFilElRqOlhNnJya3EQnYKkgiszT/ashm/0vCi0cZgbbquEYRTWX9hQyBzeN8QRRUT3CbK0IeEsJAwfJQ3uCJWB32IHNHwQVuzK0DWrjh1hsNk5tMg9Z0zH7ngUuObY0l50pfsVommxQSzpyYrqjgz8SYXuoeKJkHsiZEKWAS7XruTzrB7dXXuxHb1lu4q5qAKTM7pOKNi6QVFV/EQ31gQf0U7I8jnEYr/qjynSWBqyg895U4Lree/LfYeAjZjcxHjftFf+QCNu2OKTzxAgMBAAECggEAC+xElGxyUaUo5NeRZSeMs9+ndQFlrVP5fukezERU/KwUhHWA5oDujdqPU+Sg2xpFlmpIHXLCK3g6+E6P6UVVkRP6k7LhHak7UxjqRYd3XpdnBqA4vu6n7u9RxndPUc5JH9vDXndeLn9trlpJCVz5Xavr8sFRBX0+ZchFki5k0e9cwZ1N97QXJvzZjq7dubQrdIX2BFhNdfBAK+0mBoAnc0/9Fj+2lLmbZ1WsVWg1b17/O2ytvVN3diSoFgo5GQ4gtKN5L/lNwFeZW/+y94PvdU//Zt2ryVETYtl2UlMTdHZbtHMWVt0JRKOBdkaFUt6mD/w5+pLsfcRthQxwNZAh6QKBgQDWELmeDjJqd0dmjEXFJR4P2MRodf9rgDJxNjqx5iR+Wwbe+HqfB2QxxbEcvrC6LvJiqVSECnQDkFcJXLu5VWBIsPHv4nEHSeXTEdN35S55yT2vRC6yqxfRyYxxQSw7gfbpMQt7UsmjvX2NwaD6uLUQTQot3Zu7KoHL80XNMFp6vQKBgQC889eIuMUuSt7EdqYgF/WWn50N5SDzYpPlBYgQMrYuhb2CTinG8cttQ7svND7zwLaVWDWYL+nFuIhEWzK9lJtoomnUQ12L9ZxKVYpPr6/f1WsSG+qR+mPHlECwM5uYP0AEuugNgmYMhFuXkH1G39WOyaH6+odhOYMCeVHPBNVIRQKBgHxzSsaF8G+PGvaWdHWSB7Ekz8L/XthLtoe1BFiquOqw1wTIJtnPvUNmcHqKrkn/wzDyyszdGud7ge5SeFzeMtTv8igJWLbpEnEseunIVsW85ly/4fpDl9yCNWEeh62s+DRILCmtTscgAh9ow8MfoTxx3YoevUwKAV3l9927z85tAoGAJpXI0sOgiHaDjS0JeY5K+Wo4wSikFO9xchgyE9S3PULUUzKw905TE0n8hIQvwsj8v/yWXTCTlWu8b/ELqIkbPz/DSrRC+xy5wLg9GU6wJI5JYhZPTWYLUCsnFpRDVtC7uvuL/Y4+VpoEtiusWXfF/XWRXVYhpSoAZdXubc732t0CgYBM8uDgabay4PyERlzPHSkuokDNCW9IJDncsALTffPmAEhy/PjQfzZDH9OaFlFgOiQGfMcoxOrsObwcgPqX4vqWaWxHm0Z54qquJpvjvIKR4lgxYkh7vMbjQY8zyIkMTHjdDH4LP3jasyBkixRbt389sDCvgXjwX2bjj0UjGxJSSQ=="
+            - name: LOGGING_LEVEL_ROOT
+              value: "info"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ural-gai
+spec:
+  type: ClusterIP
+  selector:
+    app: ural-gai
+  ports:
+    - port: 10006 
+      targetPort: 8080 

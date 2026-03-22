@@ -21,11 +21,11 @@ spec:
             - name: SERVER_PORT
               value: "8080"
             - name: WANTED_GOOD_VINS
-              value: "WWWWWW,VVVVVV"
+              value: "WWWWWW;VVVVVV"
             - name: ACCIDENT_GOOD_VINS
-              value: "WWWWWW,VVVVVV"
+              value: "WWWWWW;VVVVVV"
             - name: INSPECTION_GOOD_VINS
-              value: "WWWWWW,VVVVVV"
+              value: "WWWWWW;VVVVVV"
 
 
 ---

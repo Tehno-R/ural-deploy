@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ural-cargo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ural-cargo
+  template:
+    metadata:
+      labels:
+        app: ural-cargo
+    spec:
+      containers:
+        - name: ural-cargo
+          image: kerzhakovn/ural-cargo-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432"
+            - name: DB_NAME
+              value: "ural"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASS
+              value: "postgres"
+            - name: SHOW_SQL
+              value: "true"
+            - name: LOGGING_LEVEL_ROOT
+              value: "info"
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ural-cargo
+spec:
+  type: ClusterIP
+  selector:
+    app: ural-cargo
+  ports:
+    - port: 10004
+      targetPort: 8080 

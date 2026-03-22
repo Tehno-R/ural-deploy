@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ural-contracts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ural-contracts
+  template:
+    metadata:
+      labels:
+        app: ural-contracts
+    spec:
+      containers:
+        - name: ural-contracts
+          image: kerzhakovn/ural-contracts-service:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432"
+            - name: DB_NAME
+              value: "ural"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASS
+              value: "postgres"
+            - name: SHOW_SQL
+              value: "true"
+            - name: PROXY_CARS_URL
+              value: "http://ural-cars:10002/api/cars"
+            - name: PROXY_CARGO_URL
+              value: "http://ural-cargo:10004/api/cargo"
+            - name: LOGGING_LEVEL_ROOT
+              value: "info"
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ural-contracts
+spec:
+  type: ClusterIP
+  selector:
+    app: ural-contracts
+  ports:
+    - port: 10003
+      targetPort: 8080 
