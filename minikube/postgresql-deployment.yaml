@@ -38,4 +38,4 @@ spec:
   ports:
   - port: 5432
     targetPort: 5432
-    nodePort: 10100
+    nodePort: 30100
