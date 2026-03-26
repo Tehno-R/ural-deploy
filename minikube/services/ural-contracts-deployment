@@ -47,9 +47,10 @@ metadata:
   name: ural-contracts
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-contracts
   ports:
     - port: 10003
       targetPort: 8080 
+      nodePort: 30003

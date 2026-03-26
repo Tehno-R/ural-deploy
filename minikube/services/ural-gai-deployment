@@ -37,9 +37,10 @@ metadata:
   name: ural-gai
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-gai
   ports:
     - port: 10001 
       targetPort: 8080 
+      nodePort: 30001

@@ -44,9 +44,10 @@ metadata:
   name: ural-cargo
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-cargo
   ports:
     - port: 10004
       targetPort: 8080 
+      nodePort: 30004

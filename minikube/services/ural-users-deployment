@@ -45,9 +45,10 @@ metadata:
   name: ural-users
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-users
   ports:
     - port: 10005 
       targetPort: 8080 
+      nodePort: 30005

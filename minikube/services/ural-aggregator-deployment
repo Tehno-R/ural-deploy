@@ -46,9 +46,10 @@ metadata:
   name: ural-aggregator
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-aggregator
   ports:
     - port: 10000 
       targetPort: 8080 
+      nodePort: 30000

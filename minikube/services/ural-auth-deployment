@@ -51,9 +51,10 @@ metadata:
   name: ural-auth
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-auth
   ports:
     - port: 10006 
       targetPort: 8080 
+      nodePort: 30006
