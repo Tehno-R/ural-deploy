@@ -19,3 +19,4 @@ services:
   - ural-contracts-deployment
   - ural-users-deployment
   - ural-auth-deployment
+  - ural-front-deployment
