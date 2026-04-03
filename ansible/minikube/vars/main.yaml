@@ -13,14 +13,14 @@ infra:
   - kafka-deployment.yaml
 
 services:
-  - ural-aggregator-deployment
-  - ural-gai-deployment
-  - ural-cars-deployment
-  - ural-cargo-deployment
-  - ural-contracts-deployment
-  - ural-users-deployment
-  - ural-auth-deployment
-  - ural-front-deployment
+  - ural-aggregator-deployment.yaml
+  - ural-gai-deployment.yaml
+  - ural-cars-deployment.yaml
+  - ural-cargo-deployment.yaml
+  - ural-contracts-deployment.yaml
+  - ural-users-deployment.yaml
+  - ural-auth-deployment.yaml
+  - ural-front-deployment.yaml
 
 monitoring:
-  - prometheus-deployment
+  - prometheus-deployment.yaml
