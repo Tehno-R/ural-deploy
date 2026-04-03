@@ -34,7 +34,7 @@ spec:
             - name: PROXY_CONTRACTS_URL
               value: "http://ural-contracts:10003/api"
             - name: FRONT_URL
-              value: "http://ural-front:10007/api"
+              value: "http://ural-front:8080"
             - name: LOGGING_LEVEL_ROOT
               value: "info"
           imagePullPolicy: Always

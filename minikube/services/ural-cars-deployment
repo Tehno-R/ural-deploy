@@ -43,9 +43,10 @@ metadata:
   name: ural-cars
   namespace: dev
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ural-cars
   ports:
     - port: 10002
       targetPort: 8080 
+      nodePort: 30002
