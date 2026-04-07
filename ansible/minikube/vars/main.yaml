@@ -23,4 +23,5 @@ services:
   - ural-front-deployment.yaml
 
 monitoring:
+  - node-exporter-daemonset.yaml
   - prometheus-deployment.yaml
