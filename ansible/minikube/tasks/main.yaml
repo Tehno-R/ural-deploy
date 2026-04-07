@@ -47,3 +47,7 @@
   loop: "{{ monitoring }}"
   loop_control:
     label: "{{ item }}"
+
+# --- Enable HeadLamp ---
+- name: Enable HeadLamp
+  command: minikube addon enable headlamp
