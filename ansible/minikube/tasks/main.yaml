@@ -50,4 +50,4 @@
 
 # --- Enable HeadLamp ---
 - name: Enable HeadLamp
-  command: minikube addon enable headlamp
+  command: minikube addons enable headlamp
