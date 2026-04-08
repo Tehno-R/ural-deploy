@@ -35,11 +35,11 @@
     label: "{{ item }}"
 
 # --- Applying Manifests ---
-# - name: Apply manifests for services
-#   command: kubectl apply -f {{ manifests_services_path }}/{{ item }}
-#   loop: "{{ services }}"
-#   loop_control:
-#     label: "{{ item }}"
+- name: Apply manifests for services
+  command: kubectl apply -f {{ manifests_services_path }}/{{ item }}
+  loop: "{{ services }}"
+  loop_control:
+    label: "{{ item }}"
 
 # --- Applying Manifests ---
 - name: Apply manifests for monitoring
