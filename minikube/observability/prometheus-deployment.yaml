@@ -58,4 +58,4 @@ data:
       - job_name: 'node-exporter'
         static_configs:
           - targets:
-              - node-exporter:metrics
+              - node-exporter:9100
