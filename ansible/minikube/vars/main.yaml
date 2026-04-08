@@ -25,3 +25,4 @@ services:
 monitoring:
   - node-exporter-daemonset.yaml
   - prometheus-deployment.yaml
+  - grafana-deployment.yaml
