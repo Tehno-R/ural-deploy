@@ -9,7 +9,7 @@
 
 - block:
   - name: Check minikube status
-    command: minikube status --format '{{.Host}}'
+    command: minikube status --format '{% raw %}{{.Host}}{% endraw %}'
     register: minikube_status
     failed_when: false
     changed_when: false
