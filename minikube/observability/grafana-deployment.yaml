@@ -28,7 +28,7 @@ spec:
           configMap:
             name: grafana-datasources
         - name: grafana-data
-          PersistentVolumeClaim:
+          persistentVolumeClaim:
             claimName: grafana-storage
 
 ---
