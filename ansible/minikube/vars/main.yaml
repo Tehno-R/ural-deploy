@@ -4,6 +4,8 @@ manifests_path: "{{ repo_dest }}/minikube"   # manifests place
 manifests_services_path: "{{ repo_dest }}/minikube/services"
 manifests_observability_path: "{{ repo_dest }}/minikube/observability"
 ingress_file: "ingress.yaml"
+headlamp_port: "32520"
+recreate: "false"
 
 infra:
   - namespace.yaml

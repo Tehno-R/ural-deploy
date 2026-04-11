@@ -1,9 +1,23 @@
 # --- Start Minikube ---
-- name: Delete minikube
-  command: minikube delete
+- block:
+  - name: Delete minikube cluster
+    command: minikube delete
 
-- name: Start minikube
-  command: minikube start
+  - name: Start minikube
+    command: minikube start
+  when: recreate | bool
+
+- block:
+  - name: Check minikube status
+    command: minikube status --format '{{.Host}}'
+    register: minikube_status
+    failed_when: false
+    changed_when: false
+
+  - name: Start minikube if not running
+    command: minikube start
+    when: minikube_status.stdout != "Running"
+  when: not (recreate | bool)
 
 # --- Repo ---
 - name: Remove repo if exists
@@ -48,6 +62,6 @@
   loop_control:
     label: "{{ item }}"
 
-# --- Enable HeadLamp ---
-- name: Enable HeadLamp
-  command: minikube addons enable headlamp
+# --- Install HeadLamp ---
+- name: Install HeadLamp
+  command: helm install headlamp headlamp/headlamp --namespace headlamp --create-namespace --set service.type=NodePort --set service.nodePort={{ headlamp_port }}
