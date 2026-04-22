@@ -4,7 +4,7 @@
     command: minikube delete
 
   - name: Start minikube
-    command: minikube start
+    command: minikube start --cpus=4 --memory=6144 --preload=false
   when: recreate | bool
 
 - block:
@@ -62,6 +62,10 @@
   loop_control:
     label: "{{ item }}"
 
+# --- Install kube-state-metrics ---
+- name: Install kube-state-metrics
+  command: helm install kube-state-metrics prometheus-community/kube-state-metrics -n monitoring
+
 # --- Install HeadLamp ---
 - name: Install HeadLamp
-  command: helm install headlamp headlamp/headlamp --namespace headlamp --create-namespace --set service.type=NodePort --set service.nodePort={{ headlamp_port }}
+  command: helm install headlamp headlamp/headlamp --namespace headlamp --set service.type=NodePort --set service.nodePort={{ headlamp_port }}
