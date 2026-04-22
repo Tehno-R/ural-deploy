@@ -22,7 +22,7 @@ spec:
             - name: SERVER_PORT
               value: "8080"
             - name: DB_URL
-              value: "jdbc:postgresql://postgres:5432"
+              value: "jdbc:postgresql://postgres.infra.svc.cluster.local:5432"
             - name: DB_NAME
               value: "ural"
             - name: DB_USER
